@@ -31,3 +31,34 @@ function userFunction2(name: string, age: number, country: string = "USA") {
 }
 
 console.log("userFunction2: ", userFunction2("John", 25, "UK"));
+
+// Custom types
+
+type greetingFunction = (greeting: string) => string;
+
+type UserObject = {
+  name: string;
+  age: number;
+  country: string;
+  isAdult?: boolean;
+  greeting: greetingFunction;
+};
+
+const userObject: UserObject = {
+  name: "John",
+  age: 18,
+  country: "USA",
+  greeting: (greeting: string) => `${greeting} ${userObject.name}`,
+};
+
+function isAdult(user: UserObject): UserObject {
+  if (user.age >= 18) {
+    user.isAdult = true;
+  } else {
+    user.isAdult = false;
+  }
+  return user;
+}
+
+console.log("isAdult: ", isAdult(userObject));
+console.log("greeting: ", userObject.greeting("Hello"));
